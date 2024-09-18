@@ -1,0 +1,62 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Поиск</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Подключение jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- Подключение вашего файла JavaScript -->
+    <script src="{% static 'js/search.js' %}"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .aircraft {
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            padding: 15px;
+            border-radius: 8px;
+        }
+        .aircraft-details, .emergency-procedures {
+            margin-top: 15px;
+        }
+        .aircraft img {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+
+<form class="d-flex" role="search">
+    <input class="form-control me-2" id="search-input" type="search" placeholder="Поиск" aria-label="Поиск"
+           autocomplete="off">
+    <ul id="search-dropdown" class="dropdown-menu" style="display: none;"></ul>
+</form>
+
+<h1>Модели самолётов</h1>
+
+{% for obj in objects %}
+<section class="aircraft">
+    <h2>{{ obj.name }}</h2>
+    <img src="{{ obj.photo.url }}" alt="{{ obj.name }}">
+    <div class="aircraft-details">
+        <h3>Характеристики</h3>
+        <p>{{ obj.specifications }}</p>
+    </div>
+    <div class="emergency-procedures">
+        <h3>Аварийные ситуации и инструкции</h3>
+        <p>{{ obj.avariem_situation }}</p>
+        <a href='{% url "aircraft_details" %}'>Подробнее</a>
+    </div>
+    <p>{{ obj.historik }}</p>
+    <p>Дата публикации: {{ obj.date_publication }}</p>
+</section>
+{% endfor %}
+
+</body>
+</html>
+

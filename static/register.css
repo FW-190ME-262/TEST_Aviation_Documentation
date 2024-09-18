@@ -1,0 +1,11 @@
+
+.d1{
+    display:flex;
+    justify-content: center;
+    width:30%;
+    height:600px;
+    margin-left:35%;
+    margin-top:50px;
+    background-color: white;
+    border-radius: 10px;
+}

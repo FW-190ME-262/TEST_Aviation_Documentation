@@ -1,0 +1,34 @@
+<!-- myapp/templates/myapp/index.html -->
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link rel="stylesheet" href="{% static 'bf109/css/style.css' %}">
+    <title>Отзывы</title>
+
+    <script src="{% static 'bf109/js/script.js' %}" defer></script>
+</head>
+<body>
+    <div class="container">
+        <button class="admin-button" onclick="showAdminLogin()">M</button>
+        <h1>Отзывы</h1>
+        <div class="review-form">
+            <input type="text" id="username" placeholder="Ваше имя">
+            <input type="file" id="avatar">
+            <textarea id="review-text" placeholder="Ваш отзыв"></textarea>
+            <button onclick="addReview()">Добавить отзыв</button>
+        </div>
+        <div id="reviews" class="reviews"></div>
+    </div>
+
+    <div id="admin-login" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeAdminLogin()">&times;</span>
+            <input type="password" id="admin-key" placeholder="Введите секретный ключ">
+            <button onclick="checkAdminKey()">Войти</button>
+        </div>
+    </div>
+</body>
+</html>

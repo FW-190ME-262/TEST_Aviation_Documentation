@@ -1,0 +1,89 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Подключение jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- Подключение вашего файла JavaScript -->
+    <title>{{ object.name }}</title>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+        <a class="navbar-brand"  href='{% url "register" %}'><h2>register</h2></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Переключатель навигации">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active"  href='{% url "index" %}'>all planes</a>
+
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href='{% url "home" %}'>Home</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                       aria-expanded="false">
+                        Выпадающий список
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="{% url 'play_game' %}" class="btn btn-success">Play Mini Game</a></li>
+                        <li><a class="dropdown-item" href='{% url "home" %}'>aircraft_details</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="#">Что-то еще здесь</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled">Отключенная</a>
+                </li>
+            </ul>
+            <form class="d-flex" role="search">
+                <input class="form-control me-2" type="search" placeholder="Поиск" aria-label="Поиск">
+                <button class="btn btn-outline-success" type="submit">Поиск</button>
+            </form>
+        </div>
+    </div>
+</nav>
+<form class="d-flex" role="search" action="{% url 'search_aircraft' %}" method="get">
+    <input class="form-control me-2" type="search" name="q" placeholder="Поиск по названию" aria-label="Поиск">
+    <button class="btn btn-outline-success" type="submit">Поиск</button>
+</form>
+
+
+
+    <h1>{{ object.name }}</h1>
+    <img src="{{ object.photo.url }}" alt="{{ object.name }}">
+    <div>
+        <h3>Характеристики</h3>
+        <p>{{ object.specifications }}</p>
+    </div>
+    <div>
+        <h3>Аварийные ситуации и инструкции</h3>
+        <p>{{ object.avariem_situation }}</p>
+    </div>
+    <p>{{ object.historik }}</p>
+    <p>Дата публикации: {{ object.date_publication }}</p>
+
+    <a href="{% url 'aircraft_details' %}">Назад к списку</a>
+
+<div class="aircraft-grid">
+    {% for obj in objects %}
+        <h2>{{ obj.name }}</h2>
+        <img src="{{ obj.photo.url }}" alt="{{ obj.name }}">
+        <p>{{ obj.text }}</p>
+        {% if obj.drawing %}
+            <a href="{{ obj.drawing.url }}">Скачать чертёж</a>
+        {% endif %}
+    {% endfor %}
+    </div>
+
+</body>
+</html>
