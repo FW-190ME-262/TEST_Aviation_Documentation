@@ -1,38 +1,24 @@
 from datetime import datetime
-from .forms import PhoneLoginForm
 from django.contrib.auth.decorators import login_required
 from django.views.generic import DetailView
 from .forms import UserProfileForm
-from django.shortcuts import get_object_or_404
+
 from django.http import HttpResponse
-from django.shortcuts import render, redirect
+
 from .models import Object, SiteVisitor
 
-from django.shortcuts import render
 from django.http import JsonResponse
-from django.shortcuts import render, get_object_or_404
-from .models import Object  # Предполагается, что ваша модель называется Object
-import random
-from django.shortcuts import render, redirect
-from .models import Praktic_avariem_play
-from .forms import PhoneLoginForm
-
-
-from .utils import generate_verification_code
 
 from django.shortcuts import render, get_object_or_404
 from .models import Praktic_avariem_play, Object
-from django.shortcuts import render, redirect
-from .forms import PhoneLoginForm
-from django.contrib.auth import login
-from .models import User
-from twilio.rest import Client
+
 import random
 
 from django.shortcuts import render, redirect
 from .forms import PhoneLoginForm
 from .utils import generate_verification_code  # если эта функция определена в utils.py
 from twilio.rest import Client
+
 
 def send_sms(phone_number, code):
     account_sid = 'your_account_sid'
@@ -44,6 +30,7 @@ def send_sms(phone_number, code):
         from_='+1234567890',  # ваш Twilio номер
         to=phone_number
     )
+
 
 def phone_login(request):
     if request.method == 'POST':
@@ -58,7 +45,6 @@ def phone_login(request):
     return render(request, 'login.html', {'form': form})
 
 
-
 def top_up_balance(request):
     if request.method == 'POST':
         # Use payment gateway API to process payment
@@ -68,8 +54,6 @@ def top_up_balance(request):
         request.user.profile.save()
         return redirect('profile')
     return render(request, 'top_up.html')
-
-
 
 
 def phone_login(request):
@@ -87,9 +71,7 @@ def phone_login(request):
     return render(request, 'login.html', {'form': form})
 
 
-
 def play_game(request, aircraft_id):
-    # Get the specific aircraft
     aircraft = get_object_or_404(Object, id=aircraft_id)
 
     # Retrieve the emergency situations for the specific aircraft
@@ -155,6 +137,7 @@ def aircraft_detail(request, id):
     aircraft = get_object_or_404(Object, id=id)
     return render(request, 'aircraft_detail.html', {'aircraft': aircraft})
 
+
 def aircraft_details(request, id):
     aircraft = get_object_or_404(Object, id=id)
     return render(request, 'aircraft_details.html', {'aircraft': aircraft})
@@ -197,6 +180,7 @@ def aircraft_detail(request, id):
 
 def otziv(request):
     return render(request, 'otziv.html')
+
 
 class MyDetailView(DetailView):
     model = Object
@@ -264,11 +248,6 @@ def search_aircraft(request):
 def aircraft_poisk(request, pk):
     aircraft = get_object_or_404(Object, pk=pk)
     return render(request, 'aircraft_poisk.html', {'aircraft': aircraft})
-
-
-name = (' Я люблю и принемаю себя даже если я хочу...'
-        ' даже если я хочу концентрировать своё внемание сабытие в соей жизни на 100% сейчас на всегда без всяких условий. вдох выдох . '
-        'Я люблю и принемаю себя даже если я не хочу... Вдох выдох')
 
 
 class VisitorTrackingMiddleware:

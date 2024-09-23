@@ -20,8 +20,7 @@ class Object(models.Model):
     historik = models.TextField()
     avariem_situation = models.TextField()
     date_publication = models.DateField()
-    drawing = models.FileField(upload_to='drawings/', blank=True, null=True)
-    blender_model = models.FileField(upload_to='blender_models/', blank=True, null=True)
+    # blender_model = models.FileField(upload_to='blender_models/', blank=True, null=True)
 
 
 class Praktic_avariem_play(models.Model):
